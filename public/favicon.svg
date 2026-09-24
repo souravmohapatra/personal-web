@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="">
+  <rect width="64" height="64" rx="14" fill="#28513B" />
+  <circle cx="32" cy="32" r="19" fill="#FAFAFA" />
+  <circle cx="32" cy="32" r="19" fill="none" stroke="#DCEBD8" stroke-width="4" />
+  <text
+    x="32"
+    y="41"
+    text-anchor="middle"
+    font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif"
+    font-size="26"
+    font-weight="650"
+    fill="#28513B"
+  >S</text>
+</svg>

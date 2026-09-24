@@ -1,0 +1,20 @@
+---
+import { profile } from '../data/profile';
+---
+
+<footer class="site-footer">
+  <div class="wrap site-footer__inner">
+    <nav aria-label="Profiles">
+      <ul class="profile-links">
+        {
+          profile.links.map((link) => (
+            <li>
+              <a href={link.url} rel="me">{link.label}</a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+    <p>© 2026 {profile.name} ({profile.nickname})</p>
+  </div>
+</footer>

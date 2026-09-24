@@ -1,0 +1,28 @@
+---
+import { profile } from '../data/profile';
+
+const linkedin = profile.links.find((link) => link.id === 'linkedin');
+const github = profile.links.find((link) => link.id === 'github');
+---
+
+<section class="section section--work" id="work" aria-labelledby="work-title">
+  <div class="wrap">
+    <h2 class="section__title" id="work-title">Engineering work</h2>
+    <ol class="work-list">
+      {
+        profile.experience.map((entry) => (
+          <li class="work-item">
+            <h3>{entry.subject}</h3>
+            <p class="work-item__org">{entry.org}</p>
+            <p>{entry.summary}</p>
+          </li>
+        ))
+      }
+    </ol>
+    <p class="section__more">
+      <a href="#career">Career and education</a>
+      {linkedin && <> · <a href={linkedin.url} rel="me">{linkedin.label}</a></>}
+      {github && <> · <a href={github.url} rel="me">{github.label}</a></>}
+    </p>
+  </div>
+</section>

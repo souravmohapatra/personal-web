@@ -1,0 +1,36 @@
+---
+import { profile } from '../data/profile';
+---
+
+<section class="section" id="career" aria-labelledby="career-title">
+  <div class="wrap">
+    <h2 class="section__title" id="career-title">Career and education</h2>
+    <ol class="chronology">
+      {
+        profile.experience.map((entry) => (
+          <li>
+            <span class="chronology__date">
+              {entry.start} – {entry.end}
+            </span>
+            <span>
+              <strong>{entry.title}</strong>, {entry.org}
+              {entry.location ? ` — ${entry.location}` : ''}
+              {entry.note && <p class="chronology__note">{entry.note}</p>}
+            </span>
+          </li>
+        ))
+      }
+      {
+        profile.education.map((entry) => (
+          <li>
+            <span class="chronology__date">Completed {entry.completed}</span>
+            <span>
+              <strong>{entry.qualification}</strong>, {entry.org}
+              {entry.note && <p class="chronology__note">{entry.note}</p>}
+            </span>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>

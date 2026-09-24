@@ -1,19 +1,62 @@
 # Handoff
 
-Updated: 2026-09-23T14:26:22+00:00
+Updated: 2026-09-23 (after local implementation)
 
 ## Current outcome
 
-A detailed local implementation plan is ready in PLAN.md, with checkpoints CP0–CP6. LOCAL-VALIDATION.md supplies the browser matrix, functional/accessibility/privacy cases, visual review rubric, and final acceptance checklist. No website implementation, install, build, test, push, or deployment has been performed. These planning documents are being committed at the user’s request.
+The website is **fully implemented and validated locally**: a one-page Astro
+site (static output, TypeScript, plain CSS) with real content, the two-sided
+swiveling profile control, regression tests, and production checks. Local
+preview: `npm run preview -- --host 127.0.0.1 --port 4321`. Checkpoints CP0–CP6
+are recorded with evidence in `.agent/work/personal-career-website/`
+(PROGRESS.md, VALIDATION.md, evidence/). Nothing has been committed, pushed, or
+deployed; hosting remains a separate user-led task.
+
+Final acceptance (2026-09-23): `npm run check` 0 errors · `npm run build`
+2 pages · `npm run check:built` OK · `npm run test:e2e` **44/44 on Chromium +
+WebKit 26.6** · Lighthouse mobile 100/100 (LCP 1.2s, CLS 0) · clean-copy
+`npm ci`/check/build verified from a source-only copy.
 
 ## Resume
 
-Read PLAN.md first, then PERSONAL-STORY.md, PROFILE-INTERACTION.md, BACKGROUND.md, and BROWSER-FOLLOWUP.md. DESIGN-BRIEF.md preserves the earlier content inventory; the current PLAN.md overrides its old hosting milestones and provisional stack choices. the superseded avatar-generation brief (not included) is superseded.
+1. `npm ci`, then `npm run dev` (or `npm run build && npm run preview`).
+   Node 24 (`.nvmrc`); commands and content-editing guide in `README.md`.
+2. Validation results, browser matrix, and defect history:
+   `.agent/work/personal-career-website/VALIDATION.md`.
+3. Content facts live in `src/data/{profile,publications,photographs}.ts`;
+   prose in `src/components/*.astro`.
 
-Implementation baseline: Astro static output, TypeScript, plain CSS, npm, small browser-side avatar controller. User wants the completed website fully working locally on a machine with browser access; hosting comes later. An instruction to implement this plan is the next action, not further generic discovery.
+## Known gaps (honest, documented)
 
-Required assets exist in the original workspace root: avatar.png and myself.jpeg. They are not included in this Markdown-only commit; copy them separately to the implementation machine. Preserve originals. User will populate gallery photographs later; deliver a polished text-only photography section plus optional gallery support. The requested profile control swivels twice on initial presentation, settles on the frog, and toggles on click/tap/keyboard; reduced-motion and failure behavior are specified.
+- **Firefox (Playwright build) could not launch in this environment** (profile-
+  folder startup failure, Firefox 155 / macOS 27, even raw binary). The
+  firefox project stays configured; `npm run test:e2e:firefox` runs where it
+  launches. Firefox checks are not claimed as passed.
+- No screen-reader automation available; accessibility-tree/name/focus review
+  done instead (VALIDATION CP4/A05).
+- Harness video recording unavailable (no ffmpeg on PATH); motion evidence is
+  timestamped frame sequences (the plan allows either).
 
-Confirmed direction: clean professional presentation, pastel green, occasional frog character, curiosity, Milky Way photography, and immersive fantasy. No public contact details. No work-breakthrough anecdotes. Publication inventory is reconciled. External sites to revisit are listed in BROWSER-FOLLOWUP.md and are not implementation blockers.
+## Facts and decisions to preserve
 
-Planning environment had a broken sandbox (bwrap loopback error); read/write commands used reviewed escalated execution. Reassess the next machine rather than assuming it has the same limitation.
+- No public contact details anywhere (text, metadata, assets, structured
+  data). No CV download. Publication inventory: ASPLOS 2025 + IJECE 2018 +
+  MSc thesis (separately labeled); the 2023 dataset candidate stays out until
+  its primary record is verified. A 2017 IJAER co-authorship surfaced during
+  the 2026-09-23 Scholar retrieval and is deliberately NOT on the site —
+  recorded in BACKGROUND.md for Sourav to decide.
+- Profile control behavior contract lives in PROFILE-INTERACTION.md; the
+  implementation also drives face visibility from rotation parity because
+  WebKit does not cull 3D backfaces in raster (VALIDATION CP3).
+- Photographs are deferred by the user; the gallery renders finished prose +
+  Instagram link until `src/data/photographs.ts` gets entries (README documents
+  the process; `tests/fixtures/TEST-FIXTURE-not-sourav-photography.png` exists
+  for exercising the populated path).
+- Astro 7 note: `astro preview` backgrounds itself on non-TTY runs; use
+  `--ignore-lock` for foreground/test-runner-owned serving.
+
+## Next (user-led)
+
+Hosting: choose hostname, set `SITE_URL` (then canonical/OG), sitemap/robots,
+Pages workflow, DNS/HTTPS, and decide the fate of the old
+`souravmohapatra.github.io` site before migration.

@@ -1,0 +1,48 @@
+---
+import { publications } from '../data/publications';
+import { profile } from '../data/profile';
+
+const kindLabel = {
+  conference: 'Conference paper',
+  journal: 'Journal article',
+  thesis: 'MSc thesis',
+};
+
+const scholar = profile.links.find((link) => link.id === 'scholar');
+
+const citation = (pub: (typeof publications)[number]) =>
+  [pub.venueShort ? pub.venue : undefined, pub.detail, pub.authors]
+    .filter(Boolean)
+    .join(' · ');
+---
+
+<section class="section" id="research" aria-labelledby="research-title">
+  <div class="wrap research">
+    <header class="research__intro">
+      <h2 class="section__title" id="research-title">Research</h2>
+      <p class="section__lede">
+        My research has covered memory systems for devices with intermittent
+        power, and real-time scheduling.
+      </p>
+    </header>
+    <ol class="research-list">
+      {
+        publications.map((pub) => (
+          <li>
+            <p class="entry-meta">
+              {kindLabel[pub.kind]} · {pub.venueShort ?? pub.venue} {pub.year}
+            </p>
+            <h3>
+              <a href={pub.url}>{pub.title}</a>
+            </h3>
+            <p>{pub.explanation}</p>
+            {citation(pub) && <p class="entry-meta">{citation(pub)}</p>}
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+  <p class="wrap section__more">
+    More on <a href={scholar ? scholar.url : '#'} rel="me">Google Scholar</a>.
+  </p>
+</section>

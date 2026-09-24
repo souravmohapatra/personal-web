@@ -1,0 +1,40 @@
+---
+import { getImage } from 'astro:assets';
+import frogSrc from '../assets/profile/frog-avatar.png';
+import portraitSrc from '../assets/profile/sourav-portrait.jpeg';
+
+// Small fixed derivatives: metadata-stripped at build, avatar transparency
+// preserved. 368px covers the 184px circle at 2x.
+const frog = await getImage({
+  src: frogSrc,
+  width: 368,
+  format: 'webp',
+  quality: 80,
+});
+const portrait = await getImage({
+  src: portraitSrc,
+  width: 368,
+  height: 368,
+  fit: 'cover',
+  format: 'webp',
+  quality: 80,
+});
+---
+
+<div class="profile" data-profile data-portrait-src={portrait.src}>
+  <img
+    src={frog.src}
+    width="368"
+    height="368"
+    alt="A geometric green frog holding a camera — my avatar"
+    loading="eager"
+    fetchpriority="high"
+    decoding="async"
+    data-profile-frog
+  />
+  <p class="profile__hint profile__hint--idle" data-profile-hint>Click or tap to flip</p>
+</div>
+
+<script>
+  import '../scripts/profile-flip';
+</script>

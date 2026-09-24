@@ -63,6 +63,21 @@ Verified author names, title, and DOI against the [publisher article record](htt
 
 The website should feature both the ASPLOS 2025 paper and IJECE 2018 article. The MSc thesis is separately labeled; the dataset remains optional pending primary verification. No further Scholar export is needed for planning. The no-public-contact-details instruction remains unchanged.
 
+## Browser-retrieval update (2026-09-23)
+
+Google Scholar was successfully read with a real browser (see
+BROWSER-FOLLOWUP.md). The profile lists four entries: the two reconciled
+papers and the MSc thesis above, plus an additional co-authorship the packet
+had not inventoried: Leena Das, Durga Prasad Mohapatra, and Sourav Mohapatra,
+“Schedulability analysis for rate-monotonic algorithm in parallel real-time
+systems,” International Journal of Applied Engineering Research 12(16),
+5681–5689 (2017). Recorded here as an unverified-in-primary-source candidate
+only: the website intentionally ships just the reconciled inventory (ASPLOS
+2025, IJECE 2018, thesis). If Sourav confirms this paper and its canonical
+link, it can be added to `src/data/publications.ts`. Remaining uncertainties:
+publisher record not consulted for the 2017 article; dataset candidate still
+unverified; LinkedIn still authwalled.
+
 ## Personal discovery
 
 See PERSONAL-STORY.md for the user’s six detailed answers and historical Cover_Letter.pdf evidence. Current CV takes precedence over the older letter. The site direction is being revised beyond a resume layout; implementation remains out of scope.

@@ -1,0 +1,61 @@
+---
+import { Image } from 'astro:assets';
+import { photographs } from '../data/photographs';
+import { profile } from '../data/profile';
+
+const instagram = profile.links.find((link) => link.id === 'instagram');
+---
+
+<section
+  class:list={[
+    'section',
+    'section--photography',
+    { 'section--photography--compact': photographs.length === 0 },
+  ]}
+  id="photography"
+  aria-labelledby="photography-title"
+>
+  <div class="wrap">
+    <h2 class="section__title" id="photography-title">Under the night sky</h2>
+    <div class="prose">
+      <p class="section__lede">
+        The Milky Way is my favourite thing to photograph. Getting the image I
+        want means planning where to be and when to be there.
+      </p>
+      <p>
+        I enjoy the rest of it too: heading out, taking the photographs, then
+        editing and sharing them.
+      </p>
+      <p>
+        See my photographs on <a href={instagram ? instagram.url : '#'} rel="me"
+          >Instagram</a
+        >.
+      </p>
+    </div>
+    {
+      photographs.length > 0 && (
+        <div class="gallery">
+          {photographs.map((photo) => (
+            <figure>
+              <Image
+                src={photo.src}
+                alt={photo.alt}
+                width={photo.src.width}
+                height={photo.src.height}
+              />
+              <figcaption>
+                {photo.caption}
+                {(photo.place || photo.date) && (
+                  <span class="entry-meta">
+                    {' '}
+                    ({[photo.place, photo.date].filter(Boolean).join(', ')})
+                  </span>
+                )}
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      )
+    }
+  </div>
+</section>

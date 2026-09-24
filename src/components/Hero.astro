@@ -1,0 +1,23 @@
+---
+import ProfileFlip from './ProfileFlip.astro';
+import { profile } from '../data/profile';
+---
+
+<section class="hero" aria-labelledby="hero-title">
+  <div class="wrap hero__inner">
+    <div>
+      <h1 class="hero__title" id="hero-title">{profile.name}</h1>
+      <p class="hero__nickname">
+        My friends call me Benga, or <a class="highlight" href="#why-the-frog">The Beng</a>.
+      </p>
+      <p class="hero__lead">
+        I’m a {profile.role} at {profile.company}, working across firmware,
+        Linux and Android.
+      </p>
+      <p class="hero__lead hero__lead--muted">
+        I also photograph the night sky and read epic fantasy.
+      </p>
+    </div>
+    <ProfileFlip />
+  </div>
+</section>
